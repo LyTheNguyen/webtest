@@ -13,7 +13,7 @@ import { fetchJobs } from '../services/api';
 
 // Configure axios defaults
 const API_URL = 'https://backend-app-wvmb.onrender.com';
-const API_TOKEN = '82e1467e76ede38d2ab2512f13ddcbe6208e554ccca3e50d16519132df4a6b793522932fd63875a22b8385259b4d100fa6df1b91f888385661cb27d7c857d8889a3ee0c0a1487882ae1fc97d0f35b6ba71b23a06c093ab035cb343cbc43f6be86ac599309306fae308eb0c89a98f20c4f0c1c98f50a31bce323f211d321c3c12';
+const API_TOKEN = '87153f3c93cd3b71e190ea4c0d37c48c8bc643c05b912c25962716a4fb97a72ae3c78061bfd54ad808d740dd88b81889349b29eab341b6db40d4ae11a3f98361c179b2a91ed0c51a905e9e57a18a6ff42f9c17bd27e9c3a82e58e9d42fddb5531ea575197b126b8e35d8a199b8910c5be853ddda88f86f8dbe9ed18fbbdfa93a';
 
 // Create axios instance with default config
 const axiosInstance = axios.create({
