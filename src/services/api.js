@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:1337/api';
+const API_URL = 'https://backend-app-wvmb.onrender.com/api';
 
 // Mock data for fallback if API fails
 const MOCK_JOBS = {
