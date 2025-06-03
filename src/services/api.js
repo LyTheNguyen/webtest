@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://backend-app-wvmb.onrender.com/api';
+const API_URL = '/api';  // Sử dụng Netlify Functions
 
 // Mock data for fallback if API fails
 const MOCK_JOBS = {
