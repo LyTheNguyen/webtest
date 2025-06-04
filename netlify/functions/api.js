@@ -6,7 +6,7 @@ exports.handler = async function(event, context) {
   
   try {
     // Gọi đến BE nội bộ
-    const response = await fetch(`http://localhost:1337${path}`, {
+    const response = await fetch(`http://113.164.195.3:1337${path}`, {
       method: event.httpMethod,
       headers: event.headers,
       body: event.body

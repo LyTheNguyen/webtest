@@ -7,30 +7,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/bootstrap.css';
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { fetchJobs } from '../services/api';
-import axios from 'axios';
-
-// Configure axios defaults
-const API_URL = 'https://backend-app-wvmb.onrender.com';
-const API_TOKEN = '87153f3c93cd3b71e190ea4c0d37c48c8bc643c05b912c25962716a4fb97a72ae3c78061bfd54ad808d740dd88b81889349b29eab341b6db40d4ae11a3f98361c179b2a91ed0c51a905e9e57a18a6ff42f9c17bd27e9c3a82e58e9d42fddb5531ea575197b126b8e35d8a199b8910c5be853ddda88f86f8dbe9ed18fbbdfa93a';
-
-// Create axios instance with default config
-const axiosInstance = axios.create({
-  baseURL: API_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  }
-});
-
-// Add request interceptor to add token to all requests
-axiosInstance.interceptors.request.use(
-  (config) => {
-    config.headers.Authorization = `Bearer ${API_TOKEN}`;
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+import api from '../config/api';
 
 const commonInputStyle = {
   height: '40px',
@@ -162,15 +139,9 @@ const JobApplication = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.notRobot) {
-      alert('Vui lòng xác nhận bạn không phải là người máy');
-      return;
-    }
+    setSubmitting(true);
 
     try {
-      setSubmitting(true);
-
-      // First, submit the form data
       const dataObj = {
         data: {
           hovaten: formData.hovaten || '',
@@ -203,16 +174,11 @@ const JobApplication = () => {
         console.log('Đang tải lên file CV...');
         
         try {
-          const uploadResponse = await axios.post(
-            `${API_URL}/api/upload`,
-            fileFormData,
-            {
-              headers: {
-                'Authorization': `Bearer ${API_TOKEN}`,
-                'Content-Type': 'multipart/form-data'
-              }
+          const uploadResponse = await api.post('/api/upload', fileFormData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
             }
-          );
+          });
 
           if (!uploadResponse.data || uploadResponse.data.length === 0) {
             alert('Không thể tải lên file CV');
@@ -234,7 +200,7 @@ const JobApplication = () => {
       console.log('Đang gửi dữ liệu form:', dataObj);
 
       try {
-        const response = await axiosInstance.post('/api/thongtinungviens', dataObj);
+        const response = await api.post('/api/thongtinungviens', dataObj);
         console.log('Phản hồi từ server:', response.data);
 
         if (!response.data || !response.data.data || !response.data.data.id) {
